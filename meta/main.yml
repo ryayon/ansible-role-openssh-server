@@ -1,6 +1,6 @@
 galaxy_info:
   author: ryayon
-  role_name: openssh-server
+  role_name: openssh_server
   description: OpenSSH server management module
   company: KPYou IT
 
