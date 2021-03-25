@@ -1,0 +1,5 @@
+---
+- name: Set up OpenSSH server on Debian.
+  include_tasks: setup-Debian.yml
+  when:
+    - ansible_distribution == 'Debian'

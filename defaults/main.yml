@@ -1,0 +1,7 @@
+---
+openssh_server_package_state: present
+
+openssh_server_config_port: 22
+openssh_server_config_permitrootlogin: 'yes'
+openssh_server_config_permitemptypasswords: 'no'
+openssh_server_config_passwordauthentication: 'yes'
