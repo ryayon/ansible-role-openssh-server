@@ -1,19 +1,19 @@
 ---
-- name: Install the OpenSSH server
+- name: Install the OpenSSH server - Debian
   apt:
     name: openssh-server
     state: "{{ openssh_server_package_state }}"
   when:
     - ansible_distribution == 'Debian'
 
-- name: Install the OpenSSH server
+- name: Install the OpenSSH server - RedHat
   ansible.builtin.dnf:
     name: openssh-server
     state: "{{ openssh_server_package_state }}"
   when:
     - ansible_distribution == 'RedHat'
 
-- name: Configure the OpenSSH server
+- name: Configure the OpenSSH server - Debian
   template:
     src: sshd_config.j2
     dest: /etc/ssh/sshd_config
@@ -21,4 +21,14 @@
     group: root
     mode: '0644'
   notify:
-    - Restart the OpenSSH server
+    - Restart the OpenSSH server - Debian
+
+- name: Configure the OpenSSH server - Redhat
+  template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - Restart the OpenSSH server - RedHat
