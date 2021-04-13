@@ -1,5 +1,24 @@
 ---
-- name: Set up OpenSSH server on Debian.
-  include_tasks: setup-Debian.yml
+- name: Install the OpenSSH server
+  apt:
+    name: openssh-server
+    state: "{{ openssh_server_package_state }}"
   when:
     - ansible_distribution == 'Debian'
+
+- name: Install the OpenSSH server
+  ansible.builtin.dnf:
+    name: openssh-server
+    state: "{{ openssh_server_package_state }}"
+  when:
+    - ansible_distribution == 'RedHat'
+
+- name: Configure the OpenSSH server
+  template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - Restart the OpenSSH server
